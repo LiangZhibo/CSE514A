@@ -1,6 +1,14 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Nov 11 12:59:26 2018
+
+@author: zhangzubin
+"""
 import os
 import tensorflow as tf
 import cv2
+import random
+import math
 from tensorflow import keras
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
@@ -30,6 +38,7 @@ def prepare_image_data(training_num, validation_num, test_num):
 
     train_label = label(0, training_num)
     train_image = perturbation(train_image, train_label)
+    print(len(train_image))
 
     # Construct the image data of test data
     test_file_name = []
@@ -73,6 +82,7 @@ def perturbation(train_image, train_label):
     # image data after perturbation
     images_after_perturb = train_image
 
+
     # get the emotion that has the most number
     most_emotion = get_most_emotion_num(all_emotion_nums)
 
@@ -89,7 +99,7 @@ def perturbation(train_image, train_label):
 
         image_count = 0
         while (current_emotion_num < all_emotion_nums[most_emotion]):
-            if (image_count == len(images_inorder[emotion]-1)):
+            if (image_count >= len(images_inorder[emotion])-1):
                 image_count = 0
             image = images_inorder[emotion][image_count]
             perturb_image = image_rotation(image)

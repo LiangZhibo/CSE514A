@@ -91,10 +91,11 @@ def perturbation(train_image, train_label):
         while (current_emotion_num < all_emotion_nums[most_emotion]):
             if (image_count == len(images_inorder[emotion]-1)):
                 image_count = 0
-            image = images_inorder[emotion][image_count++]
+            image = images_inorder[emotion][image_count]
             perturb_image = image_rotation(image)
             images_after_perturb.append(perturb_image)
-            current_emotion_num ++
+            current_emotion_num += 1
+            image_count += 1
 
     return images_after_perturb
 
@@ -103,7 +104,7 @@ def get_emotion_num(train_label, emotion):
     emotion_num = 0
     for e in train_label:
         if (e == emotion):
-            emotion_num ++
+            emotion_num += 1
     return emotion_num
 
 # get the emotion label that has the greatest number of images

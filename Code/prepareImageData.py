@@ -108,7 +108,7 @@ def get_emotion_num(train_label, emotion):
     return emotion_num
 
 # get the emotion label that has the greatest number of images
-def get_most_emotion(all_emotion_nums):
+def get_most_emotion_num(all_emotion_nums):
     max = 0
     for i in range(len(all_emotion_nums)):
         if (all_emotion_nums[i] > all_emotion_nums[max]):

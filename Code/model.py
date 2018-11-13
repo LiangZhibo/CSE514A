@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Nov 11 13:05:32 2018
+
+@author: zhangzubin
+"""
 import tensorflow
 from tensorflow import keras
 from tensorflow.keras import layers
@@ -23,7 +29,7 @@ validation = np.array(validation)
 test = np.array(test)
 
 # Adjust the dimension of the image data
-train = train.reshape((train_num, 350, 350, 1))
+train = train.reshape((2079, 350, 350, 1))
 validation = validation.reshape((validation_num, 350, 350, 1))
 test = test.reshape((test_num, 350, 350, 1))
 
@@ -32,10 +38,10 @@ train = train.astype(np.float64)/255
 validation = validation.astype(np.float64)/255
 test = test.astype(np.float64)/255
 
-# Prepare train, validation and test label
-train_label = label(0, train_num)
-validation_label = label(train_num, train_num + validation_num)
-test_label = label(train_num + validation_num, total_num)
+# Prepare train, validation an test label
+train_label = label(0, 2079)
+validation_label = label(2079, 2079 + validation_num)
+test_label = label(2079 + validation_num, total_num)
 
 # Construct the CNN
 model = Sequential()
@@ -54,25 +60,11 @@ model.add(layers.MaxPooling2D((2, 2)))
 model.add(layers.Flatten())
 model.add(layers.Dense(512, activation='relu'))
 model.add(layers.Dense(1, activation='relu'))
-# model.summary()
+model.summary()
 
 # Configure the model for training
-model.compile(loss='binary_crossentropy', optimizer=optimizers.RMSprop(lr=1e-4), metrics=['acc'])
+#model.compile(loss='binary_crossentropy', optimizer=optimizers.RMSprop(lr=1e-4), metrics=['acc'])
 
 # Fit the model
 print('Start training')
-model.fit(train, train_label, epochs=5, batch_size=64)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#model.fit(train, train_label, epochs=5, batch_size=64)

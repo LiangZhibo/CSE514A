@@ -130,6 +130,12 @@ def image_rotation(image):
     # rotate image here
     rows = image.shape[0]
     cols = image.shape[1]
-    degree = random.uniform(0, 2*math.pi)
+    degree = random.uniform(-45, 45)
     M = cv2.getRotationMatrix2D(((cols-1)/2.0, (rows-1)/2.0), degree, 1)
+    N= random.uniform(0,1)
+    if (N>0.5):
+      M = cv2.flip(M,0)
+    O= random.uniform(0,1)
+    if(O>0.5):
+      M = cv2.GaussianBlur(M,(3,3),0,0)
     return cv2.warpAffine(image, M, (cols, rows))

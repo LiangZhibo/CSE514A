@@ -59,6 +59,8 @@ def prepare_image_data(training_num, validation_num, test_num):
     for name in validation_file_name:
         path = os.path.join(validation_dir, name)
         validation_image.append(load_image(path))
+        
+
 
     return train_image, validation_image, test_image
 
@@ -95,8 +97,6 @@ def perturbation(train_image, train_label):
         current_emotion_num = all_emotion_nums[emotion]
 
         # the number of perturbation needed for this emotion
-        num_perturb = most_emotion - current_emotion_num
-
         image_count = 0
         while (current_emotion_num < all_emotion_nums[most_emotion]):
             if (image_count >= len(images_inorder[emotion])-1):
